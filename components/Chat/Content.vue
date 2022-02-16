@@ -68,7 +68,7 @@ export default {
   methods: {
     styleBorder(msg, index) {
       if (index >= this.messages.length - 1) {
-        if (this.messages[index - 1].user == msg.user) {
+        if (index != 0 && this.messages[index - 1].user == msg.user) {
           return 'last'
         }
       } else {

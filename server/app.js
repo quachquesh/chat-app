@@ -54,8 +54,14 @@ const { callbackify } = require('util')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+const mongodbUrl =
+  'mongodb+srv://nqtrung:FAft9lJLRwgWUyCc@cluster0.le3x9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongodb = process.env.PRODUCTION
+  ? mongodbUrl
+  : 'mongodb://localhost:27017/chat-app'
+
 mongoose
-  .connect('mongodb://localhost:27017/chat-app')
+  .connect(mongodb)
   .then(() => console.log('Kết nối database thành công'))
   .catch((err) => console.log(err))
 
