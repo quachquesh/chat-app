@@ -55,7 +55,7 @@ export default {
           if (res.data.status) {
             token = res.data.token
             Cookies.set('token', token)
-            Cookies.set('token_exp', res.headers.token_exp)
+            Cookies.set('token_exp', res.data.token_exp)
           } else {
             this.$toast.error(res.data.message)
           }
@@ -90,6 +90,7 @@ export default {
     },
   },
   async validate({ req, redirect, store }) {
+    // return true
     let token = null
     let token_exp = 0
     if (process.server && req.headers.cookie) {

@@ -20,7 +20,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('friend/getFriends', this.token)
-    this.socket = await io.connect('https://nqt-chat-app.herokuapp.com:3001', {
+    this.socket = await io.connect(process.env.URL_API || 'localhost:3001', {
       extraHeaders: {
         Authorization: 'Bearer ' + this.token,
       },
