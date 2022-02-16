@@ -17,6 +17,7 @@
         <button class="btn btn-primary">Đăng ký</button>
       </div>
     </form>
+    <nuxt-link to="/login">Login</nuxt-link>
   </div>
 </template>
 

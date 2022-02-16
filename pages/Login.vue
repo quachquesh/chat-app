@@ -13,10 +13,10 @@
         <button class="btn btn-primary">Login</button>
       </div>
     </form>
-    <button @click="checkToken()">Check token</button>
+    <!-- <button @click="checkToken()">Check token</button> -->
     <nuxt-link to="/register">Register</nuxt-link>
-    <button @click="logout()">LogOut</button>
-    <nuxt-link to="/">index</nuxt-link>
+    <!-- <button @click="logout()">LogOut</button>
+    <nuxt-link to="/">index</nuxt-link> -->
   </div>
 </template>
 
