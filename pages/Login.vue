@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login form">
     <form @submit.prevent="login()">
       <div class="form-group">
         <label for="">Username</label>
@@ -9,14 +9,14 @@
         <label for="">Password</label>
         <input type="password" class="form-control" v-model="password" />
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary">Login</button>
+      <div class="form-group btn-group">
+        <button class="btn btn-primary">Đăng nhập</button>
+      </div>
+      <div class="form-group btn-group">
+        <span>Chưa có tài khoản?</span>
+        <nuxt-link to="/register">Đăng ký</nuxt-link>
       </div>
     </form>
-    <!-- <button @click="checkToken()">Check token</button> -->
-    <nuxt-link to="/register">Register</nuxt-link>
-    <!-- <button @click="logout()">LogOut</button>
-    <nuxt-link to="/">index</nuxt-link> -->
   </div>
 </template>
 
@@ -31,18 +31,6 @@ export default {
     }
   },
   methods: {
-    logout() {
-      let token = localStorage.getItem('token')
-      this.$axios
-        .$delete('/user/logout', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res)
-        })
-    },
     async login() {
       let token = null
       // đăng nhập lấy token
@@ -75,18 +63,6 @@ export default {
             Cookies.remove('token')
           })
       }
-    },
-    checkToken() {
-      let token = Cookies.get('token')
-      this.$axios
-        .$get('/user/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res)
-        })
     },
   },
   async validate({ req, redirect, store }) {
@@ -122,5 +98,69 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #f5f5f5;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10%;
+  form {
+    width: 400px;
+    .form-group {
+      margin-bottom: 10px;
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      input {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 14px;
+        box-sizing: border-box;
+        &:focus {
+          outline: none;
+          border-color: #2196f3;
+        }
+      }
+    }
+    .btn-group {
+      margin-top: 12px;
+      button,
+      a {
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 14px;
+        background: #2196f3;
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+          background: #0d47a1;
+        }
+      }
+      a {
+        background: #1a8854;
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+          background: #14b106;
+        }
+      }
+    }
+  }
+}
 </style>
