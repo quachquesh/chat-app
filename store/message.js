@@ -12,7 +12,10 @@ export const mutations = {
     state.messages = messages
   },
   ADD_MESSAGE(state, message) {
-    if (message.user == state.user._id || message.receiver == state.user._id) {
+    if (
+      (user && message.user == state.user._id) ||
+      message.receiver == state.user._id
+    ) {
       state.messages.push(message)
     }
   },
