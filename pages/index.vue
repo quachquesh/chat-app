@@ -29,15 +29,14 @@ export default {
     this.socket.on('user-online', (user) => {
       this.$store.commit('friend/SET_ONLINE', user)
       let userMsg = this.$store.getters['message/getUser']
-      console.log(userMsg._id, user._id)
-      if (userMsg._id == user._id) {
+      if (userMsg != null && userMsg._id == user._id) {
         this.$store.commit('message/SET_USER', user)
       }
     })
     this.socket.on('user-offline', (user) => {
       this.$store.commit('friend/SET_OFFLINE', user)
       let userMsg = this.$store.getters['message/getUser']
-      if (userMsg._id == user._id) {
+      if (userMsg != null && userMsg._id == user._id) {
         this.$store.commit('message/SET_USER', user)
       }
     })
