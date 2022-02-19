@@ -1,6 +1,6 @@
 <template>
   <div class="login form">
-    <form @submit.prevent="login()">
+    <form @submit.prevent="login($event)">
       <div class="form-group">
         <label for="">Username</label>
         <input type="text" class="form-control" v-model="username" />
@@ -10,7 +10,7 @@
         <input type="password" class="form-control" v-model="password" />
       </div>
       <div class="form-group btn-group">
-        <button class="btn btn-primary">Đăng nhập</button>
+        <button class="btn btn-primary" type="submit" id="btn-login">Đăng nhập</button>
       </div>
       <div class="form-group btn-group">
         <span>Chưa có tài khoản?</span>
@@ -31,7 +31,9 @@ export default {
     }
   },
   methods: {
-    async login() {
+    async login(e) {
+      let btn = e.submitter;
+      btn.setAttribute('disabled', '');
       let token = null
       // đăng nhập lấy token
       await this.$store
@@ -46,7 +48,11 @@ export default {
             Cookies.set('token_exp', res.data.token_exp)
           } else {
             this.$toast.error(res.data.message)
+            btn.removeAttribute('disabled');
           }
+        })
+        .catch(() => {
+          btn.removeAttribute('disabled');
         })
       // check info token
       if (token) {
@@ -138,6 +144,14 @@ body {
     }
     .btn-group {
       margin-top: 12px;
+      button[type="submit"] {
+        &[disabled] {
+          background: #44a4f1;
+          &:hover {
+            background: #44a4f1;
+          }
+        }
+      }
       button,
       a {
         width: 100%;

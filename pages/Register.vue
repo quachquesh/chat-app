@@ -1,6 +1,6 @@
 <template>
   <div class="login form">
-    <form @submit.prevent="register()">
+    <form @submit.prevent="register($event)">
       <div class="form-group">
         <label for="">Name</label>
         <input type="text" class="form-control" v-model="name" />
@@ -14,7 +14,7 @@
         <input type="password" class="form-control" v-model="password" />
       </div>
       <div class="form-group btn-group">
-        <button class="btn btn-primary">Đăng ký</button>
+        <button class="btn btn-primary" type="submit">Đăng ký</button>
       </div>
       <div class="form-group btn-group">
         <span>Đã có tài khoản?</span>
@@ -36,7 +36,9 @@ export default {
     }
   },
   methods: {
-    register() {
+    register(e) {
+      let btn = e.submitter;
+      btn.setAttribute('disabled', '');
       this.$axios
         .$post('/user/register', {
           name: this.name,
@@ -47,8 +49,12 @@ export default {
           if (res.status) {
             this.$router.push('/login')
           } else {
+            btn.removeAttribute('disabled');
             this.$toast.error(res.message)
           }
+        })
+        .catch(() => {
+          btn.removeAttribute('disabled');
         })
     },
   },
@@ -125,6 +131,14 @@ body {
     }
     .btn-group {
       margin-top: 12px;
+      button[type="submit"] {
+        &[disabled] {
+          background: #44a4f1;
+          &:hover {
+            background: #44a4f1;
+          }
+        }
+      }
       button,
       a {
         width: 100%;
