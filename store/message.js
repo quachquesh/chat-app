@@ -16,7 +16,7 @@ export const mutations = {
       state.user != null &&
       (message.user == state.user._id || message.receiver == state.user._id)
     ) {
-      state.messages.push(message)
+      state.messages.unshift(message)
     }
   },
   READ_MESSAGE(state, message) {
@@ -43,7 +43,7 @@ export const actions = {
       },
     })
     commit('SET_USER', data.user)
-    commit('SET_MESSAGES', data.messages)
+    commit('SET_MESSAGES', data.messages.reverse())
     return data
   },
 }

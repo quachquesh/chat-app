@@ -196,7 +196,7 @@ export default {
     flex: 1;
     padding: 16px 12px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     overflow-y: auto;
     .message {
       display: flex;
