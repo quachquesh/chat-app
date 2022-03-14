@@ -197,7 +197,6 @@ export default {
     padding: 16px 12px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     overflow-y: auto;
     .message {
       display: flex;

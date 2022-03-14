@@ -43,10 +43,15 @@ export default {
   },
   async mounted() {
     if (this.id) {
-      await this.$store.dispatch('message/getMessages', {
-        friendId: this.id,
-        token: Cookies.get('token'),
-      })
+      await this.$store
+        .dispatch('message/getMessages', {
+          friendId: this.id,
+          token: Cookies.get('token'),
+        })
+        .then(() => {
+          let contentElement = document.querySelector('#chat-content .content')
+          contentElement.scrollTop = contentElement.scrollHeight
+        })
     }
   },
 }
