@@ -73,6 +73,7 @@ export const actions = {
         }
       )
       commit('SET_SEARCHFRIENDS', searchFriends)
+      console.log('SET_SEARCHFRIENDS')
     } else {
       commit('SET_SEARCHFRIENDS', [])
     }
